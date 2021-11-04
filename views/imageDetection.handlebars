@@ -1,0 +1,247 @@
+<form action="/imageDetection" method="post">
+
+ </form>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Use the power of Machine Learning to diagnose TB from chest x-rays.">
+
+
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    </head>
+
+    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+        <!-- MENU -->
+        <section class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+
+                </div>
+
+                <!-- MENU LINKS -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="appointment-btn"><a href="index.html">Home</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- NEWS DETAIL -->
+        <section id="news-detail" data-stellar-background-ratio="0.5">
+
+            <main role="main" class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="progress progress-bar progress-bar-striped progress-bar-animated mb-2">Loading
+                            Model</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <input id="image-selector" class="form-control border-0" type="file" style="font-size: 2.5rem;">
+                    </div>
+                    <div class="col-6">
+                        <button id="predict-button" style="font-size: 2.5rem;"
+                            class="btn btn-primary float-right">Predict</button>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="ml-3" style="font-size: 3rem;">Image</h2>
+                        <img id="selected-image" class="ml-3" width="350" alt="">
+                    </div>
+                    <div class="col-6">
+                        <h2 class="ml-3" style="font-size: 3rem;">Predictions</h2>
+                        <ol style="font-size: 3rem;" id="prediction-list"></ol>
+                    </div>
+                </div>
+            </main>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+            <script src="js/predict.js"></script>
+            <script src="js/target_classes.js"></script>
+
+
+            <div class="box hidden">
+                <label class="outPutLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                    <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+                </label>
+            </div>
+
+
+
+
+            <!-- FOOTER -->
+            <footer data-stellar-background-ratio="5">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <div class="footer-thumb">
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
+
+                                <div class="contact-info">
+                                    <p><i class="fa fa-phone"></i> 010-070-0170</p>
+                                    <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            <div class="footer-thumb">
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                <div class="latest-stories">
+                                    <div class="stories-image">
+                                        <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                    </div>
+                                    <div class="stories-info">
+                                        <a href="#">
+                                            <h5>Amazing Technology</h5>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                                <div class="latest-stories">
+                                    <div class="stories-image">
+                                        <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                    </div>
+                                    <div class="stories-info">
+                                        <a href="#">
+                                            <h5>New Healing Process</h5>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            <div class="footer-thumb">
+                                <ul class="social-icon">
+                                    <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                    <li><a href="#" class="fa fa-twitter"></a></li>
+                                    <li><a href="#" class="fa fa-instagram"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </footer>
+           
+
+
+            <!-- SCRIPTS -->
+            <script src="js/jquery.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.sticky.js"></script>
+            <script src="js/jquery.stellar.min.js"></script>
+            <script src="js/jquery.magnific-popup.min.js"></script>
+            <script src="js/magnific-popup-options.js"></script>
+            <script src="js/wow.min.js"></script>
+            <script src="js/smoothscroll.js"></script>
+            <script src="js/owl.carousel.min.js"></script>
+            <script src="js/custom.js"></script>
+
+            <!-- CHAT BAR BLOCK -->
+            <div class="chat-bar-collapsible">
+                <button id="chat-button" type="button" class="collapsible">Chat with us!
+                    <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+                </button>
+
+                <div class="content">
+                    <div class="full-chat-block">
+                        <!-- Message Container -->
+                        <div class="outer-container">
+                            <div class="chat-container">
+                                <!-- Messages -->
+                                <div id="chatbox">
+                                    <h5 id="chat-timestamp"></h5>
+                                    <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                                </div>
+
+                                <!-- User input box -->
+                                <div class="chat-bar-input-block">
+                                    <div id="userInput">
+                                        <input id="textInput" class="input-box" type="text" name="msg"
+                                            placeholder="Tap 'Enter' to send a message">
+                                        <p></p>
+                                    </div>
+
+                                    <div class="chat-bar-icons">
+                                        <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
+                                            onclick="heartButton()"></i>
+                                        <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                            onclick="sendButton()"></i>
+                                    </div>
+                                </div>
+
+                                <div id="chat-bar-bottom">
+                                    <p></p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/responses.js"></script>
+    <script src="js/chat.js"></script>
+
+    </html>
+
+
+
