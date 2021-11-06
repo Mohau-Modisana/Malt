@@ -95,6 +95,22 @@ open({
 		res.redirect("/imageDetection");
 	});
 
+
+	app.get('/videoDetection', function (req, res) {
+		res.render("videoDetection");
+	});
+
+	app.post('/videoDetection', async function (req, res) {
+
+		console.log(req.body);
+
+		const insert_pizza = 'insert into pizza (flavour, size, price) values (?, ?, ?)';
+		await db.run(insert_pizza, req.body.flavour, req.body.size, req.body.price);
+
+		res.redirect("/videoDetection");
+	});
+
+
 	app.post('/Order', async function (req, res) {
 
 		console.log();
