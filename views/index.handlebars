@@ -37,7 +37,7 @@
      <section class="navbar navbar-default navbar-static-top" role="navigation">
           <div class="container">
 
-               <div class="navbar-header">
+               <div class="navbar-header" style="border-right: 5em;">
                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                          <span class="icon icon-bar"></span>
                          <span class="icon icon-bar"></span>
@@ -45,24 +45,23 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="index.html" class="navbar-brand">MALT <i class="fa fa-h-square"></i>ealth Services</a>
+                    <a href="https://malt1.herokuapp.com/" class="navbar-brand">MALT <i class="fa fa-h-square"></i>ealth
+                         Services</a>
                </div>
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-
+                         <div style="border-right: 5em;">
                          <form action="/imageDetection" method="post">
-                              <div class="">
-                                   <button class="appointment-btn" >Analyse with Image</button>
-                              </div>
+                                   <button class="appointment-btn">Analyse with Image</button>   
                          </form>
 
                          <form action="/videoDetection" method="post">
-                              <div class="">
-                                   <button class="appointment-btn" >Analyse with Video</button>
-                              </div>
+                                   <button class="appointment-btn">Analyse with Video</button> 
                          </form>
+
+                         </div>
                     </ul>
                </div>
 
