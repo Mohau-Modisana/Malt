@@ -92,7 +92,7 @@ open({
 		const insert_pizza = 'insert into pizza (flavour, size, price) values (?, ?, ?)';
 		await db.run(insert_pizza, req.body.flavour, req.body.size, req.body.price);
 
-		res.redirect("/pizzas");
+		res.redirect("/imageDetection");
 	});
 
 	app.post('/Order', async function (req, res) {

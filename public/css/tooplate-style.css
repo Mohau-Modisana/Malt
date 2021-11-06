@@ -340,6 +340,33 @@ http://www.tooplate.com/view/2098-health
     color: #ffffff !important;
   }
 
+    /*---------------------------------------
+      edit             
+  -----------------------------------------*/
+
+  .appointment-btn {
+    margin: 3px 0 0 20px;
+  }
+
+  .appointment-btn {
+    background: #a5c422;
+    border-radius: 3px;
+    color: #ffffff;
+    font-weight: 600;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .appointment-btn a:hover {
+    background: #4267b2;
+    color: #ffffff !important;
+  }
+
+
+  /*---------------------------------------
+      edit              
+  -----------------------------------------*/
+
   .navbar-default .navbar-nav li a {
     color: #555555;
     font-size: 12px;
@@ -1000,6 +1027,11 @@ http://www.tooplate.com/view/2098-health
     .navbar-default .navbar-nav li.appointment-btn {
       margin-left: 15px;
     }
+
+    .appointment-btn {
+      margin-left: 15px;
+    }
+
     .navbar-default .navbar-nav li a {
       display: inline-block;
       padding-top: 8px;
