@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 	if (req.path == '/login') {
 		next();
 	} else {
-		if (!req.session.username) {
+		if (!req.session.username && !req.session.password) {
 			res.redirect('/login')
 		}
 		else {
@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 
 // database setup starts here
 open({
-	filename: './pizza-101.db',
+	filename: './malt.db',
 	driver: sqlite3.Database
 }).then(async (db) => {
 
@@ -57,64 +57,28 @@ open({
 	app.get('/', async function (req, res) {
 
 		const username = req.session.username;
-		const pizzas = await db.all('select * from pizza');
-		const order = await db.get('select *, (small + medium + large) as total from pizza_order where username = ?', username);
+		const password = req.session.password;
+		const allData = await db.all('select * from malt');
+		const malt = await db.get('select * from malt where username = ? AND password = ?', username, password);
 
 		res.render('index', {
-			pizzas,
-			order,
-			username: req.session.username
+			allData,
+			malt,
+			username: req.session.username,
+			password: req.session.password
 		});
 	});
 
 
 	//add pizza to the database
-	app.get('/pizzas', async function (req, res) {
-		const pizzas = await db.all('select * from pizza');
+	app.get('/malt', async function (req, res) {
+		const malt = await db.all('select * from malt');
 
-		res.render("pizzas", {
-			pizzas
+		res.render("malt", {
+			malt
 		});
 	});
-
 	
-
-	app.post('/Order', async function (req, res) {
-
-		console.log();
-
-		const username = req.session.username;
-
-		const result = await db.get('select count(*) as orderCount from pizza_order where username = ? and status = ?', username, 'new');
-		if (result.orderCount === 0) {
-			db.run('insert into pizza_order (small, medium, large, username, status) values (0, 0,0, ?, "new")', username);
-		}
-
-		const pizza = await db.get('select * from pizza where id = ?', req.body.pizza_id);
-
-		if (pizza) {
-			console.log(pizza);
-			const size = pizza.size;
-
-			if (size == 'Small') {
-				await db.run('update pizza_order set small = small + ? where username = ?', pizza.price, username);
-			} else if (size == 'Medium') {
-				await db.run('update pizza_order set medium = medium + ? where username = ?', pizza.price, username);
-			} else if (size == 'Large') {
-				await db.run('update pizza_order set large = large + ? where username = ?', pizza.price, username);
-			}
-		}
-
-
-		res.redirect("/");
-	});
-
-
-
-	/// detection 
-
-
-
 	app.get('/imageDetection', function (req, res) {
 		res.render("imageDetection");
 	});
@@ -139,6 +103,7 @@ open({
 	app.post("/login", function (req, res) {
 		//console.log(req.body);
 		req.session.username = req.body.username;
+		req.session.password = req.body.password;
 		res.redirect('/');
 	});
 
@@ -149,6 +114,7 @@ open({
 	app.get("/logout", function (req, res) {
 		//console.log(req.body);
 		delete req.session.username;
+		delete req.session.password;
 		res.redirect('/');
 	});
 
@@ -158,5 +124,3 @@ open({
 	});
 
 });
-
-
