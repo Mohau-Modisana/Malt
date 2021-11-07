@@ -54,17 +54,13 @@ open({
 
 	await db.migrate();
 
-	let counter = 0;
-
 	app.get('/', async function (req, res) {
 
-		//const counter = await db.get('select * from counter');
 		const username = req.session.username;
 		const pizzas = await db.all('select * from pizza');
 		const order = await db.get('select *, (small + medium + large) as total from pizza_order where username = ?', username);
 
 		res.render('index', {
-			//counter: counter ? counter.count : 0
 			pizzas,
 			order,
 			username: req.session.username
@@ -81,35 +77,7 @@ open({
 		});
 	});
 
-	app.get('/imageDetection', function (req, res) {
-		res.render("imageDetection");
-	});
-
-	app.post('/imageDetection', async function (req, res) {
-
-		console.log(req.body);
-
-		const insert_pizza = 'insert into pizza (flavour, size, price) values (?, ?, ?)';
-		await db.run(insert_pizza, req.body.flavour, req.body.size, req.body.price);
-
-		res.redirect("/imageDetection");
-	});
-
-
-	app.get('/videoDetection', function (req, res) {
-		res.render("videoDetection");
-	});
-
-	app.post('/videoDetection', async function (req, res) {
-
-		console.log(req.body);
-
-		const insert_pizza = 'insert into pizza (flavour, size, price) values (?, ?, ?)';
-		await db.run(insert_pizza, req.body.flavour, req.body.size, req.body.price);
-
-		res.redirect("/videoDetection");
-	});
-
+	
 
 	app.post('/Order', async function (req, res) {
 
@@ -142,49 +110,35 @@ open({
 	});
 
 
-	// show them so that we can buy them
 
-	//create a pizza order
-
-	//make the pizzas paid screen, delivered - using the status field
+	/// detection 
 
 
 
-	app.post('/count', async function (req, res) {
-
-		try {
-
-
-			const action = req.body.action;
-
-			if (action === 'Press button to count') {
-
-				const result = await db.get('select count(*) as count from counter');
-				if (result.count === 0) {
-					await db.run('insert into counter(count) values (?)', 1)
-				} else {
-					await db.exec('update counter set count = count + 1');
-				}
-
-			} else if (action === 'Reset the counter') {
-
-				await db.exec('delete from counter');
-
-			}
-
-		} catch (err) {
-			console.log(err);
-		}
-
-		res.redirect('/')
+	app.get('/imageDetection', function (req, res) {
+		res.render("imageDetection");
 	});
 
+	app.post('/imageDetection', async function (req, res) {
+
+		res.redirect("/imageDetection");
+	});
+
+
+	app.get('/videoDetection', function (req, res) {
+		res.render("videoDetection");
+	});
+
+	app.post('/videoDetection', async function (req, res) {
+		res.redirect("/videoDetection");
+	});
+
+
+
+
 	app.post("/login", function (req, res) {
-
 		//console.log(req.body);
-
 		req.session.username = req.body.username;
-
 		res.redirect('/');
 	});
 
@@ -193,15 +147,10 @@ open({
 	});
 
 	app.get("/logout", function (req, res) {
-
 		//console.log(req.body);
-
 		delete req.session.username;
-
 		res.redirect('/');
 	});
-
-
 
 	// start  the server and start listening for HTTP request on the PORT number specified...
 	app.listen(PORT, function () {
