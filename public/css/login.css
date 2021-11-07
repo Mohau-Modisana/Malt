@@ -7,6 +7,8 @@
   list-style-type: none;
   outline: none;
   font-family: "Baloo Da 2", cursive;
+  color: #fff;
+  background-color: #fff;
 }
 
 html {
@@ -67,7 +69,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 0.1rem solid #cfcfcf;
+  border: 0.1rem solid black;
   padding: 3rem;
 }
 
