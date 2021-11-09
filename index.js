@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+const bcrypt = require('bcryptjs');
 
 // import sqlite modules
 const sqlite3 = require('sqlite3');
@@ -9,12 +10,6 @@ const e = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 3017;
-
-app.use(session({
-	secret: 'keyboard cat',
-	resave: false,
-	saveUninitialized: true
-}));
 
 // enable the req.body object - to allow us to use HTML forms
 app.use(express.json());
@@ -28,22 +23,6 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 
-app.use(function (req, res, next) {
-	//is the user logged in? if so all's ok
-
-	if (req.path == '/login') {
-		next();
-	} else {
-		if (!req.session.username && !req.session.password) {
-			res.redirect('/login')
-		}
-		else {
-			next();
-		}
-	}
-	//if not show the login screen
-});
-
 // database setup starts here
 open({
 	filename: './malt.db',
@@ -55,30 +34,87 @@ open({
 	await db.migrate();
 
 	app.get('/', async function (req, res) {
-
-		const username = req.session.username;
-		const password = req.session.password;
-		const allData = await db.all('select * from malt');
-		const malt = await db.get('select * from malt where username = ? AND password = ?', username, password);
-
+		//const counter = await db.get('select * from counter');
+		const users = await db.all('select * from users');
 		res.render('index', {
-			allData,
-			malt,
-			username: req.session.username,
-			password: req.session.password
+			//counter: counter ? counter.count : 0
+			users
 		});
 	});
 
+	app.post("/register", async function (req, res) {
+		try {
+			const fullname = req.body.fullname;
+			const email = req.body.email;
+			const password = req.body.password;
 
-	//add pizza to the database
-	app.get('/malt', async function (req, res) {
-		const malt = await db.all('select * from malt');
+			const hash = await bcrypt.hash(password, 10);
+			const insert_users = 'insert into users (fullname, email, hash) values (?, ?, ?)';
+			await db.run(insert_users, fullname, email, hash);
+			const users = await db.all('select * from users');
+			console.log(users)
+			res.redirect('/');
 
-		res.render("malt", {
-			malt
-		});
+
+		} catch (e) {
+			console.log(e);
+			res.status(500).send("incorrect information!");
+			res.redirect('/');
+		}
 	});
+
+
+	app.post("/", async function (req, res) {
+		try {
+			const fullname = req.body.fullname;
+			const email = req.body.email;
+			const password = req.body.password;
+
+
+			const user = await db.get('select * from users where email = ?', email);
+			if (user) {
+				const vaildPass = await bcrypt.compare(password, user.hash);
+				if (vaildPass) {
+					console.log("in");
+					res.redirect('/home');
+				} else {
+					res.redirect('/');
+					console.log("out");
+				}
+			} else {
+				console.log("user not fownd");
+			}
+
+		} catch (e) {
+			console.log(e);
+			//res.status(500).send("Something broke!");
+		}
+	});
+
+
+	app.get('/home', async function (req, res) {
+		//const counter = await db.get('select * from counter');
+		const users = await db.all('select * from users');
+		
 	
+		res.render('home', {
+			//counter: counter ? counter.count : 0
+			users
+		});
+	});
+
+	app.post('/home', function (req, res) {
+		res.redirect("/home");
+	});
+
+	app.get("/", function (req, res) {
+		res.render('/');
+	});
+
+	app.get("/logout", function (req, res) {
+		res.redirect('/');
+	});
+
 	app.get('/imageDetection', function (req, res) {
 		res.render("imageDetection");
 	});
@@ -95,27 +131,6 @@ open({
 
 	app.post('/videoDetection', async function (req, res) {
 		res.redirect("/videoDetection");
-	});
-
-
-
-
-	app.post("/login", function (req, res) {
-		//console.log(req.body);
-		req.session.username = req.body.username;
-		req.session.password = req.body.password;
-		res.redirect('/');
-	});
-
-	app.get("/login", function (req, res) {
-		res.render('login');
-	});
-
-	app.get("/logout", function (req, res) {
-		//console.log(req.body);
-		delete req.session.username;
-		delete req.session.password;
-		res.redirect('/');
 	});
 
 	// start  the server and start listening for HTTP request on the PORT number specified...

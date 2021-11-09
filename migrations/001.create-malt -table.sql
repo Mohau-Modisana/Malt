@@ -1,5 +1,6 @@
-create table malt(
+create table users(
 	id integer primary key AUTOINCREMENT,
-	username text,
-	password password
+	fullname text,
+	email text,
+	hash text
 );
