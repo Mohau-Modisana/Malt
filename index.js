@@ -22,7 +22,6 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-
 // database setup starts here
 open({
 	filename: './malt.db',
@@ -55,14 +54,12 @@ open({
 			console.log(users)
 			res.redirect('/');
 
-
 		} catch (e) {
 			console.log(e);
 			res.status(500).send("incorrect information!");
 			res.redirect('/');
 		}
 	});
-
 
 	app.post("/", async function (req, res) {
 		try {
@@ -87,7 +84,6 @@ open({
 
 		} catch (e) {
 			console.log(e);
-			//res.status(500).send("Something broke!");
 		}
 	});
 
@@ -95,11 +91,19 @@ open({
 	app.get('/home', async function (req, res) {
 		//const counter = await db.get('select * from counter');
 		const users = await db.all('select * from users');
-		
-	
 		res.render('home', {
 			//counter: counter ? counter.count : 0
 			users
+		});
+	});
+
+	app.post('/home', async function (req, res) {
+		const email = req.body.email;
+		const name = await db.get('select fullname from users where email = ?', email);
+		var fullname = name.fullname;
+
+		res.render('home', {
+			fullname
 		});
 	});
 

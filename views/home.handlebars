@@ -17,7 +17,8 @@
                <div class="row">
 
                     <div class="col-md-4 col-sm-3">
-                         <p>Welcome to MALT Health Services</p>
+                         <p>Welcome to MALT Health Services {{fullname}}</p>
+                         <a href="/home" class="">{{fullname}}</a>
                     </div>
 
                     <div class="col-md-8 col-sm-9 text-align-right">
@@ -30,7 +31,6 @@
                </div>
           </div>
      </header>
-
      <!-- MENU -->
      <section class="navbar navbar-default navbar-static-top" role="navigation">
           <div class="container">
@@ -43,7 +43,7 @@
 
                          <!-- lOGO TEXT HERE -->
                          <a href="/home" class="navbar-brand">MALT <i class="fa fa-h-square"></i>ealth Services</a>
-                         <a href="/home" class="navbar-brand">{{user}}</a>
+                         <a href="/home" class="navbar-brand">{{fullname}}</a>
                     </div>
 
                     <!-- MENU LINKS -->
@@ -206,7 +206,6 @@
                </div>
           </div>
      </footer>
-
 
      <!-- SCRIPTS -->
      <script src="js/jquery.js"></script>

@@ -63,11 +63,6 @@ $("#predict-button").click(async function () {
 		return num.className
 	})
 
-	/*  top5.forEach((num1) => {
-		console.log(num1.className);
-		console.log(num1.probability.toFixed(2));
-		console.log(Math.max(...num1.probability.toFixed(2)));
-	}) */
 	for (let i = 0; i < 1; i++) {
 		percentage = top5[i].probability.toFixed(2);
 		clsName = top5[i].className;
@@ -80,11 +75,14 @@ $("#predict-button").click(async function () {
 
 	if (clsName === "DrugRash") {
 
-	} else if (clsName === "ErythemaMigrans") {
+	} 
+	else if (clsName === "ErythemaMigrans") {
 
-	} else if (clsName === "PityriasisRoseaRash") {
+	} 
+	else if (clsName === "PityriasisRoseaRash") {
 
-	} else if (clsName === "RingWorm") {
+	} 
+	else if (clsName === "RingWorm") {
 
 	}
 
