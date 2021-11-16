@@ -108,18 +108,39 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 
-        <script src="js/predict.js"></script>
-        <script src="js/target_classes.js"></script>
-
-
-        <div class="box hidden">
-            <label class="outPutLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
-                <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+        <div class="box hidden">  
+        <div>
+             <label class="outPutLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                <span></span>
             </label>
         </div>
-
-
-
+        <div>
+             <label class="explanationLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                <span></span>
+            </label>
+        </div> 
+         <div>
+             <label class="causesLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                <span></span>
+            </label>
+        </div>  
+        <div>
+             <label class="treatmentLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                <span></span>
+            </label>
+        </div> 
+         <div>
+             <label class="selftreatmentLbl" style="font-size: 2.5rem; color:rgb(5, 10, 51);">
+                <span></span>
+            </label>
+        </div>        
+            <div>
+                <button id="predict-button" style="font-size: 2.5rem;"
+                    class="btn btn-primary float-right">Predict</button>
+            </div>
+        </div>
+         <script src="js/predict.js"></script>
+         <script src="js/target_classes.js"></script>
 
         <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
@@ -237,4 +258,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/responses.js"></script>
 <script src="js/chat.js"></script>
+
 </html>
