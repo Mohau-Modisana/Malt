@@ -1,4 +1,5 @@
 <link href="css/login.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="css/popup.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text.css' />
 <!--//webfonts-->
@@ -37,6 +38,8 @@
         </ul>
     </form>
 
+
+
     <form action="/home" method="post">
         <ul class="right-form">
             <h3>Login:</h3>
@@ -45,11 +48,27 @@
                 <li> <input type="password" name="password" placeholder="Password" required /></li>
                 <h4>enter email n password if you have an account</h4>
                 <input type="submit" onclick="myFunction()" value="Login">
+                <a href="#popup" class="btn btn--white">Read more!</a>
             </div>
             <div class="clear"> </div>
         </ul>
         <div class="clear"> </div>
-
     </form>
+
+    <body>
+        <button id="btnChangeBg" class="btn btn-primary float-right" style="font-size: 1.5rem;">Info</button>
+        <script src="js/popup.js"></script>
+        <script>
+            document.querySelector('#btnChangeBg').addEventListener('click', () => {
+                Confirm.open({
+                    title: 'warning!',
+                    message: 'The medical analysis are made based upon mechine learning models and probabilities',
+                })
+            });
+        </script>
+    </body>
+
+
+
 
 </div>

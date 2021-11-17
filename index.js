@@ -49,9 +49,7 @@ open({
 
 			const hash = await bcrypt.hash(password, 10);
 			const insert_users = 'insert into users (fullname, email, hash) values (?, ?, ?)';
-			await db.run(insert_users, fullname, email, hash);
-			const users = await db.all('select * from users');
-			console.log(users)
+			await db.run(insert_users, fullname, email, hash);			
 			res.redirect('/');
 
 		} catch (e) {
@@ -135,6 +133,27 @@ open({
 
 	app.post('/videoDetection', async function (req, res) {
 		res.redirect("/videoDetection");
+	});
+
+
+	/* app.get('/dataview', function (req, res) {
+		res.render("dataview");
+	});
+ */
+	/* app.post('/dataview', async function (req, res) {
+		res.redirect("/dataview");
+	}); */
+
+
+	app.get('/dataview', async function (req, res) {
+
+		console.log("lloyd")
+		const users = await db.all('select * from users');
+	    console.log(users)
+
+		res.render('dataview', {
+			users
+		});
 	});
 
 	// start  the server and start listening for HTTP request on the PORT number specified...
