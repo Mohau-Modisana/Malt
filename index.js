@@ -146,11 +146,7 @@ open({
 
 
 	app.get('/dataview', async function (req, res) {
-
-		console.log("lloyd")
 		const users = await db.all('select * from users');
-	    console.log(users)
-
 		res.render('dataview', {
 			users
 		});
