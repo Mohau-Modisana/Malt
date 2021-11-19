@@ -131,7 +131,7 @@
                             <td>{{fullname}}</td>
                             <td>{{email}}</td>
                             <td>{{hash}}</td>
-                            <td><button name="data_id" value="{{id}}" style="font-size: 1rem;" class="btn btn-danger ">Delete</button></td>
+                            <td><button name="data_id" value="{{id}}" style="font-size: 1rem;" class="btn btn-danger "><a href="/delete" name="data_id" value="{{id}}">Delete</a></button></td>
                         </tr>
                          {{/each}}
                     </tbody>
@@ -201,7 +201,7 @@
 
                 "pageLength": {
                 "_": "Files %d",
-                "-1": "Mostrar Todo"
+                "-1": "All"
                 }
             }
         };

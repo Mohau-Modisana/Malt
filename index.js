@@ -136,20 +136,17 @@ open({
 	});
 
 
-	/* app.get('/dataview', function (req, res) {
-		res.render("dataview");
-	});
- */
-	/* app.post('/dataview', async function (req, res) {
-		res.redirect("/dataview");
-	}); */
-
-
 	app.get('/dataview', async function (req, res) {
 		const users = await db.all('select * from users');
 		res.render('dataview', {
 			users
 		});
+	});
+
+	app.get('/delete', async function (req, res) {
+		const users = await db.run('DELETE FROM users WHERE id = ?',req.body.data_id);
+		console.log(req.body.data_id)
+		res.redirect("/dataview");
 	});
 
 	// start  the server and start listening for HTTP request on the PORT number specified...
