@@ -50,7 +50,7 @@ open({
 
 			const hash = await bcrypt.hash(password, 10);
 			const insert_users = 'insert into users (fullname, email, hash) values (?, ?, ?)';
-			await db.run(insert_users, fullname, email, hash);			
+			await db.run(insert_users, fullname, email, hash);
 			res.redirect('/');
 
 		} catch (e) {
@@ -99,10 +99,13 @@ open({
 	app.post('/home', async function (req, res) {
 		const email = req.body.email;
 		const name = await db.get('select fullname from users where email = ?', email);
+		const num = await db.get('select id from users where email = ?', email);
+		var idnum = num.id;
 		var fullname = name.fullname;
-
+		
 		res.render('home', {
-			fullname
+			fullname,
+			idnum
 		});
 	});
 
@@ -133,7 +136,7 @@ open({
 		res.render("imageDetection");
 	});
 
-	
+
 
 
 	app.get('/videoDetection', function (req, res) {
@@ -157,7 +160,7 @@ open({
 	});
 
 	app.get('/delete', async function (req, res) {
-		const users = await db.run('DELETE FROM users WHERE id = ?',req.body.data_id);
+		const users = await db.run('DELETE FROM users WHERE id = ?', req.body.data_id);
 		console.log(req.body.data_id)
 		res.redirect("/dataview");
 	});
