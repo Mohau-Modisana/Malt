@@ -78,23 +78,21 @@ $("#predict-button").click(async function () {
 	console.log(clsName);
 
 	if (clsName === "DrugRash") {
-		outPutLbl.innerHTML = "Drug Rash :";
+		outPutLbl.innerHTML = "Drug Rash";
 		explanationLbl.innerHTML = "Temporary outbreak of red, bumpy, scaly or itchy patches of skin, possibly with blisters or welts.";
 		causesLbl.innerHTML = "CAUSES : Skin rashes can have causes that aren't due to underlying disease. Examples include hot and humid weather, excess sun exposure or scratchy clothes that don't fit.";
 		treatmentLbl.innerHTML = "MEDICINE : glucocorticoids, epinephrine (given by injection), diphenhydramine, corticosteroid ";
 		selftreatmentLbl.innerHTML = "SELF TREATMENT : Avoiding harsh soaps and detergents, perfumed soaps or lotions and known allergy triggers may help to soothe irritated skin. Using an antihistamine or steroid cream may also help.";
-
 	} 
 	else if (clsName === "ErythemaMigrans") {
-		outPutLbl.innerHTML = "Erythema Migrans :";
+		outPutLbl.innerHTML = "Erythema Migrans";
 		explanationLbl.innerHTML = "an expanding rash often seen in the early stage of Lyme disease, and can also (but less commonly) be caused by southern tick-associated rash illness.";
 		causesLbl.innerHTML = "CAUSES : a bite from a lone star tick";
 		treatmentLbl.innerHTML = "MEDICINE : oral antibiotics, such as doxycycline (Acticlate, Doryx, Vibra-Tabs) or amoxicillin. A 14- to 21-day course of treatment will effectively treat the disease in most people. If your Lyme disease is in a later stage with neurological symptoms, you might need intravenous (IV) antibiotics.";
 		selftreatmentLbl.innerHTML = "SELF TREATMENT : If you’re in wooded or high grass areas during tick season (May through mid-July), it’s important that you take precautions to avoid tick bites. This is the best way to prevent Lyme disease.";
-
 	} 
 	else if (clsName === "PityriasisRoseaRash") {
-		outPutLbl.innerHTML = "Pityriasis Rosea Rash :";
+		outPutLbl.innerHTML = "Pityriasis Rosea Rash";
 		explanationLbl.innerHTML = "A skin rash that sometimes begins as a large spot on the chest, abdomen or back, followed by a pattern of smaller lesions";
 		causesLbl.innerHTML = "CAUSES : The cause of pityriasis rosea isn't well understood, but it may be triggered by a viral infection.";
 		treatmentLbl.innerHTML = "MEDICINE : Corticosteroids";
@@ -108,3 +106,4 @@ $("#predict-button").click(async function () {
 		selftreatmentLbl.innerHTML = "SELF TREATMENT : Antifungal creams, ointments, gels, or sprays.";
 	}
 });
+

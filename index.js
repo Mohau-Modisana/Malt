@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
+const email = "";
 
 // import sqlite modules
 const sqlite3 = require('sqlite3');
@@ -105,6 +106,17 @@ open({
 		});
 	});
 
+	app.post('/imageDetection', async function (req, res) {
+		const email = req.body.email;
+		const name = await db.get('select fullname from users where email = ?', email);
+		var fullname = name.fullname;
+
+		res.render('imageDetection', {
+			fullname
+		});
+	});
+
+
 	app.post('/home', function (req, res) {
 		res.redirect("/home");
 	});
@@ -121,10 +133,7 @@ open({
 		res.render("imageDetection");
 	});
 
-	app.post('/imageDetection', async function (req, res) {
-
-		res.redirect("/imageDetection");
-	});
+	
 
 
 	app.get('/videoDetection', function (req, res) {
@@ -141,6 +150,10 @@ open({
 		res.render('dataview', {
 			users
 		});
+	});
+
+	app.get('/pdf', function (req, res) {
+		res.render("pdf");
 	});
 
 	app.get('/delete', async function (req, res) {
